@@ -1,0 +1,39 @@
+---
+title: "Assignment7"
+author: "Rapeephan"
+date: "2/21/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+# Question7
+![](1.jpg)
+
+## Solution
+
+### Install package
+```{r, message=FALSE, results='hide'}
+BiocManager::install("Biobase")
+library(Biobase)
+```
+
+### Download data
+```{r, message=FALSE, results='hide'}
+con =url("http://bowtie-bio.sourceforge.net/recount/ExpressionSets/bodymap_eset.RData")
+load(file=con)
+close(con)
+bm = bodymap.eset
+edata = exprs(bm)
+```
+
+### Anser
+```{r, message=FALSE, results='hide'}
+row_sums = rowSums(edata)
+edata7 = edata[order(-row_sums),]
+index = 1:500
+heatmap(edata7[index,],Rowv=NA,Colv=NA)
+
+```
+
